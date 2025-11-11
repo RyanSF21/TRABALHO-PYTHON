@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <h2>📋 Lista de Alunos</h2>
+  <p>Veja abaixo todos os alunos cadastrados no sistema.</p>
+
+  {% if alunos %}
+  <table class="tabela-alunos">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Matrícula</th>
+        <th>Idade</th>
+        <th>Curso</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for a in alunos %}
+      <tr>
+        <td>{{ a.nome }}</td>
+        <td>{{ a.matricula }}</td>
+        <td>{{ a.idade }}</td>
+        <td>{{ a.curso }}</td>
+        <td>
+          <a href="{{ url_for('remover', matricula=a.matricula) }}" class="btn-remover">❌ Remover</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="nenhum">⚠️ Nenhum aluno cadastrado ainda.</p>
+  {% endif %}
+
+  <div class="botoes-centrais">
+    <a href="{{ url_for('cadastrar') }}" class="btn-primario">➕ Cadastrar Novo</a>
+    <a href="{{ url_for('buscar') }}" class="btn-secundario">🔍 Buscar Aluno</a>
+  </div>
+</div>
+{% endblock %}
